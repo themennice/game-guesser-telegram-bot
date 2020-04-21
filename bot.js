@@ -34,7 +34,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
 // sum command
 bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
-  var result = 0;
+  var result = 1;
   match[1].trim().split(/\s+/).forEach(function (i) {
     result = result * (+i || 1);
   })
