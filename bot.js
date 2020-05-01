@@ -57,21 +57,21 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   bot.on('message', (msg) => {
     if (msg.text.toString().toLowerCase().includes("show all options")) {
-      bot.sendMessage(msg.chat.id, "basketball");
+      bot.sendMessage(msg.chat.id, basketball.toString());
     }
   });
-  //for(var i = 0; i < 3; i++){
-    bot.on('message', (msg) => {
+  // //for(var i = 0; i < 3; i++){
+  //   bot.on('message', (msg) => {
 
-    if (sport_chars.includes(msg.text.toString().toLowerCase())) {
-      bot.sendMessage(msg.chat.id, "Yes");
-    }
-    else {
-      bot.sendMessage(msg.chat.id, "No");
-    } 
+  //   if (sport_chars.includes(msg.text.toString().toLowerCase())) {
+  //     bot.sendMessage(msg.chat.id, "Yes");
+  //   }
+  //   else {
+  //     bot.sendMessage(msg.chat.id, "No");
+  //   } 
 
-    });
-  //}
+  //   });
+  // //}
 
 
 
