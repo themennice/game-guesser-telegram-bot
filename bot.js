@@ -39,10 +39,12 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   // intiate and populate Olympic sports lists - basketball
   var basketball = ['court', 'basket', 'team', 'basketball', 'timed'];
   var football = ['goal', 'goalkeeper', 'team', 'doubles', 'grass', 'football', 'field', 'stadium', 'halves'];
-  var vargymnastics = ['gym', 'flexibility', 'score', 'jumping'];
+  var gymnastics = ['gym', 'flexibility', 'score', 'jumping'];
   var surfing = ['surfboard', 'outside', 'water', 'waves', 'singles', 'score'];
   var boxing = ['knockout', 'timed', 'punches', 'money', 'concussions', 'danger'];
   var tennis = ['court', 'singles', 'doubles', 'outdoor', 'ball', 'racket', 'net', 'umbrellas', 'helpers', 'rating'];
+
+  var all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
 
   // select a random sport from the list of sports
   var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
@@ -57,7 +59,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   bot.on('message', (msg) => {
     if (msg.text.toString().toLowerCase().includes("show all options")) {
-      bot.sendMessage(msg.chat.id, basketball.toString());
+      bot.sendMessage(msg.chat.id, all_chars.toString() + );
     }
   });
   // //for(var i = 0; i < 3; i++){
