@@ -29,6 +29,7 @@ bot.onText(/^\/sum((\s+\d+)+)$/, function (msg, match) {
 bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var name = match[1];
   bot.sendMessage(msg.chat.id, '\tWelcome to Game Guesser Bot, ' + name + '! \nI will think of an Olympic game and you will try to guess it. \n \n Simply type a characteristic of the sport and I will say yes if it belongs to my guessed sport, and no otherwise.\n \n After 10 questions simply type the name of the game you think I guessed! \n \nLet us get started! I have selected a game. Make a guess.').then(function () {
+  bot.sendMessage(msg.chat.id, 'You could also type \[show all options\] (without brackets) to see all available sport characteristics.');
   // reply sent!
 
   // declare a list of the Olympic sports for a given demonstration
@@ -43,13 +44,31 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var tennis = ['court', 'singles', 'doubles', 'outdoor', 'ball', 'racket', 'net', 'umbrellas', 'helpers', 'rating'];
 
   // select a random sport from the list of sports
-  var random_sport = sports[Math.floor(Math.random() * sports.length)];
+  var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
   // delete the chosen sport from the list so that next time no repeats occur
-  const index = sports.indexOf(random_sport);
+  const index = sports.indexOf(rand_selected_sport);
   if (index > -1) {
     sports.splice(index, 1);
   }
   console.log(sports);
+
+  var sport_chars = basketball;
+
+
+
+  bot.on('message', (msg) => {
+
+  var bye = "bye";
+  if (sport_chars.includes(msg.text.toString().toLowerCase())) {
+    bot.sendMessage(msg.chat.id, "Yes");
+  else {
+    bot.sendMessage(msg.chat.id, "No");}
+  } 
+
+});
+
+
+
   });
 });
 
