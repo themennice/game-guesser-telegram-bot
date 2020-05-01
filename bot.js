@@ -68,18 +68,18 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
     }
   });
-  // //for(var i = 0; i < 3; i++){
-  //   bot.on('message', (msg) => {
+  //for(var i = 0; i < 3; i++){
+    bot.on('message', (msg) => {
 
-  //   if (sport_chars.includes(msg.text.toString().toLowerCase())) {
-  //     bot.sendMessage(msg.chat.id, "Yes");
-  //   }
-  //   else {
-  //     bot.sendMessage(msg.chat.id, "No");
-  //   } 
+    if (sport_chars.includes(msg.text.toString().toLowerCase())) {
+      bot.sendMessage(msg.chat.id, "Yes");
+    }
+    else {
+      bot.sendMessage(msg.chat.id, "No");
+    } 
 
-  //   });
-  // //}
+    });
+  //}
 
 
 
