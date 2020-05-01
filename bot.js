@@ -55,18 +55,19 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var sport_chars = basketball;
 
 
+  for(var i = 0; i < 3; i++){
+    bot.on('message', (msg) => {
 
-  bot.on('message', (msg) => {
+    var bye = "bye";
+    if (sport_chars.includes(msg.text.toString().toLowerCase())) {
+      bot.sendMessage(msg.chat.id, "Yes");
+    }
+    else {
+      bot.sendMessage(msg.chat.id, "No");
+    } 
 
-  var bye = "bye";
-  if (sport_chars.includes(msg.text.toString().toLowerCase())) {
-    bot.sendMessage(msg.chat.id, "Yes");
+    });
   }
-  else {
-    bot.sendMessage(msg.chat.id, "No");
-  } 
-
-});
 
 
 
