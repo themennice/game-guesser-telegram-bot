@@ -61,8 +61,9 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var bye = "bye";
   if (sport_chars.includes(msg.text.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes");
+  }
   else {
-    bot.sendMessage(msg.chat.id, "No");}
+    bot.sendMessage(msg.chat.id, "No");
   } 
 
 });
