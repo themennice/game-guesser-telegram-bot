@@ -46,6 +46,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   //var all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
   var all_chars = basketball.concat(football, gymnastics);
+  all_chars = shuffle(all_chars);
   // select a random sport from the list of sports
   var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
   // delete the chosen sport from the list so that next time no repeats occur
