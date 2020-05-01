@@ -59,7 +59,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   bot.on('message', (msg) => {
     if (msg.text.toString().toLowerCase().includes("show all options")) {
-      bot.sendMessage(msg.chat.id, all_chars.toString());
+      bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
     }
   });
   // //for(var i = 0; i < 3; i++){
