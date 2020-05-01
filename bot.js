@@ -27,6 +27,7 @@ bot.onText(/^\/sum((\s+\d+)+)$/, function (msg, match) {
 
 // start command for the guess game
 bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
+
   var name = match[1];
   bot.sendMessage(msg.chat.id, '\tWelcome to Game Guesser Bot, ' + name + '! \nI will think of an Olympic game and you will try to guess it. \n \n Simply type a characteristic of the sport and I will say yes if it belongs to my guessed sport, and no otherwise.\n \n After 10 questions simply type the name of the game you think I guessed! \n \nLet us get started! I have selected a game. Make a guess.').then(function () {
   bot.sendMessage(msg.chat.id, 'You could also type \[show all options\] (without brackets) to see all available sport characteristics.');
@@ -54,11 +55,14 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   var sport_chars = basketball;
 
-
-  for(var i = 0; i < 3; i++){
+  bot.on('message', (msg) => {
+    if (msg.text.toString().toLowerCase().includes("show all options")) {
+      bot.sendMessage(msg.chat.id, basketball);
+    }
+  });
+  //for(var i = 0; i < 3; i++){
     bot.on('message', (msg) => {
 
-    var bye = "bye";
     if (sport_chars.includes(msg.text.toString().toLowerCase())) {
       bot.sendMessage(msg.chat.id, "Yes");
     }
@@ -67,7 +71,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     } 
 
     });
-  }
+  //}
 
 
 
