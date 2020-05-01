@@ -62,6 +62,12 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
     }
   });
+
+  bot.on('message', (msg) => {
+    if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
+      bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
+    }
+  });
   // //for(var i = 0; i < 3; i++){
   //   bot.on('message', (msg) => {
 
