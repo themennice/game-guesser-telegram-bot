@@ -37,8 +37,8 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   // start of looped 5 rounds
   // for
-  //while(round <= 5)
-  //{
+  while(round <= 5)
+  {
     bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess.');
     // select a random sport from the list of sports
     var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
@@ -71,6 +71,8 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       default:
       console.log("Sport not found.");
     }
+    round++;
+  }
 
     bot.on('message', (msg) => {
       if (msg.text.toString().toLowerCase().includes("show all options")) {
@@ -87,7 +89,6 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
       }
   });
-  //}
 
 
   });
