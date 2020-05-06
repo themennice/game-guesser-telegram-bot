@@ -123,18 +123,23 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 bot.onText(/^\/ask (.+)$/, function (msg, match) {
 
   var sport = match[1];
-
   
   if(sport_chars.includes(sport.toString().toLowerCase())) {
-    bot.sendMessage(msg.chat.id, "Yes");
+    bot.sendMessage(msg.chat.id, "Yes").then(function () {
+      question_num++;
+      if(question_num == 3) {
+        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+      }
+    });
   }
   else {
-      bot.sendMessage(msg.chat.id, "No");
-    }
-  question_num++;
-  if(question_num == 3) {
-    bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
-  }
+      bot.sendMessage(msg.chat.id, "No").then(function () {
+      question_num++;
+      if(question_num == 3) {
+        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+      }
+    });
+  };
 });
 
 
