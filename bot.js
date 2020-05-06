@@ -3,6 +3,10 @@ var token = '1044989057:AAGkvVCLjiY3JsJOBjENwm_5tTHy_BBuhxg';
 var Bot = require('node-telegram-bot-api'),
     bot = new Bot(token, { polling: true });
 
+// declare variables for five rounds and 10 questions for each round
+let round = 1;
+let question_num = 1;
+
 console.log('bot server started...');
 
 // hello command
@@ -46,6 +50,10 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
   var all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
 
+
+  // start of looped 5 rounds
+  // for
+
   // select a random sport from the list of sports
   var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
   // delete the chosen sport from the list so that next time no repeats occur
@@ -55,7 +63,29 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   }
   console.log(sports);
 
-  var sport_chars = basketball;
+  var sport_chars;
+  switch(rand_selected_sport) {
+    case 'basketball':
+      sport_chars = basketball;
+      break;
+    case 'football':
+      sport_chars = football;
+      break;
+    case 'gymnastics':
+      sport_chars = gymnastics;
+      break;
+    case 'surfing':
+      sport_chars = surfing;
+      break;
+    case 'boxing':
+      sport_chars = boxing;
+      break;
+    case 'tennis':
+      sport_chars = tennis;
+      break;
+    default:
+    console.log("Sport not found.");
+  }
 
   bot.on('message', (msg) => {
     if (msg.text.toString().toLowerCase().includes("show all options")) {
