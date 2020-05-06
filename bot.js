@@ -46,7 +46,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var football = ['goal', 'goalkeeper', 'team', 'doubles', 'grass', 'football', 'field', 'stadium', 'halves'];
   var gymnastics = ['gym', 'flexibility', 'score', 'jumping'];
   var surfing = ['surfboard', 'outside', 'water', 'waves', 'singles', 'score'];
-  var boxing = ['knockout', 'timed', 'punches', 'money', 'concussions', 'danger'];
+  var boxing = ['knockout', 'timed', 'singles', 'punches', 'money', 'concussions', 'danger'];
   var tennis = ['court', 'singles', 'doubles', 'outdoor', 'ball', 'racket', 'net', 'umbrellas', 'helpers', 'rating'];
 
   var all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
@@ -97,11 +97,11 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
       bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
     }
-    else if (msg.text.toString().toLowerCase().includes(sports)) {
+    else if (sports.includes(msg.text.toString().toLowerCase())) {
       bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
     }
   });
-  
+
   //for(var i = 0; i < 3; i++){
   // bot.on('message', (msg) => {
 
