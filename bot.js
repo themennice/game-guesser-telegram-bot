@@ -127,7 +127,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   if(sport_chars.includes(sport.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes").then(function () {
       question_num++;
-      if(question_num == 3) {
+      if(question_num == 4) {
         bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
       }
     });
@@ -135,7 +135,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   else {
       bot.sendMessage(msg.chat.id, "No").then(function () {
       question_num++;
-      if(question_num == 3) {
+      if(question_num == 4) {
         bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
       }
     });
