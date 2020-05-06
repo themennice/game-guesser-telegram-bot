@@ -124,7 +124,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
 
   var sport = match[1];
 
-  if(question_num == 10) {
+  if(question_num == 3) {
     bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
   }
   else if(sport_chars.includes(sport.toString().toLowerCase())) {
