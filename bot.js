@@ -124,16 +124,17 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
 
   var sport = match[1];
 
-  if(question_num == 3) {
-    bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
-  }
-  else if(sport_chars.includes(sport.toString().toLowerCase())) {
+  
+  if(sport_chars.includes(sport.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes");
   }
   else {
       bot.sendMessage(msg.chat.id, "No");
     }
   question_num++;
+  if(question_num == 3) {
+    bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+  }
 });
 
 
