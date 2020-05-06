@@ -5,7 +5,7 @@ var Bot = require('node-telegram-bot-api'),
 
 // declare variables for five rounds and 10 questions for each round
 let round = 1;
-let question_num = 1;
+let question_num = 0;
 var sport_chars;
 
 console.log('bot server started...');
@@ -97,6 +97,9 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
       bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
     }
+    else if (msg.text.toString().toLowerCase().includes(sports)) {
+      bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
+    }
   });
   //for(var i = 0; i < 3; i++){
   // bot.on('message', (msg) => {
@@ -127,7 +130,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   if(sport_chars.includes(sport.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes").then(function () {
       question_num++;
-      if(question_num == 4) {
+      if(question_num == 3) {
         bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
       }
     });
@@ -135,15 +138,12 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   else {
       bot.sendMessage(msg.chat.id, "No").then(function () {
       question_num++;
-      if(question_num == 4) {
+      if(question_num == 3) {
         bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
       }
     });
   };
 });
-
-
-
 
 // sum command
 bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
