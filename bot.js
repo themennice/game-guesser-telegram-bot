@@ -101,6 +101,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
     }
   });
+  
   //for(var i = 0; i < 3; i++){
   // bot.on('message', (msg) => {
 
