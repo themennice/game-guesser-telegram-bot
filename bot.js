@@ -6,6 +6,7 @@ var Bot = require('node-telegram-bot-api'),
 // declare variables for five rounds and 10 questions for each round
 let round = 1;
 let question_num = 1;
+var sport_chars;
 
 console.log('bot server started...');
 
@@ -63,7 +64,6 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   }
   console.log(sports);
 
-  var sport_chars;
   switch(rand_selected_sport) {
     case 'basketball':
       sport_chars = basketball;
@@ -99,22 +99,45 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     }
   });
   //for(var i = 0; i < 3; i++){
-    bot.on('message', (msg) => {
+  // bot.on('message', (msg) => {
 
-    if (sport_chars.includes(msg.text.toString().toLowerCase())) {
-      bot.sendMessage(msg.chat.id, "Yes");
-    }
-    else {
-      bot.sendMessage(msg.chat.id, "No");
-    } 
+  //   if (sport_chars.includes(msg.text.toString().toLowerCase())) {
+  //     bot.sendMessage(msg.chat.id, "Yes");
+  //   }
+  //   else if(msg.text.toString().toLowerCase() == "show all options"){
+  //     var p = 0;
+  //   }
+  //   else {
+  //     bot.sendMessage(msg.chat.id, "No");
+  //   } 
 
-    });
+  // });
   //}
 
 
 
   });
 });
+
+// helper function for asking
+bot.onText(/^\/ask (.+)$/, function (msg, match) {
+
+  var sport = match[1];
+
+  if(question_num == 10) {
+    bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+  }
+  else if(sport_chars.includes(sport.toString().toLowerCase())) {
+    bot.sendMessage(msg.chat.id, "Yes");
+  }
+  else {
+      bot.sendMessage(msg.chat.id, "No");
+    }
+  question_num++;
+});
+
+
+
 
 // sum command
 bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
