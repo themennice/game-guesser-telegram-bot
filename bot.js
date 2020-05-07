@@ -100,7 +100,6 @@ function play(chatId){
   //while (true) {
   //while(round <= 5 && flag == true)
   //{
-    flag = false;
 
     //bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess, i.e., \/ask something');
     bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a game. Make a guess, i.e., \/ask something');
@@ -152,12 +151,12 @@ function play(chatId){
       if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
         bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play");
-        flag = true;
+        question_num = 0;
       }
       else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
         bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play");
-        flag = true;
+        question_num = 0;
       }
   });
   //}
