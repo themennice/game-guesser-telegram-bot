@@ -39,7 +39,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   // for
   var flag = true;
 
-  while (true) {
+  //while (true) {
   while(round <= 5 && flag == true)
   {
     flag = false;
@@ -79,7 +79,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     }
     round++;
   }
-}
+//}
 
     bot.on('message', (msg) => {
       if (msg.text.toString().toLowerCase().includes("show all options")) {
