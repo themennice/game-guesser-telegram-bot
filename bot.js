@@ -9,10 +9,17 @@ let question_num = 0;
 var sport_chars;
 var sports;
 
-console.log('bot server started...');
+console.log('*********** bot server started *************');
 
 // start command for the guess game
 bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
+
+  // reset counter variables for subsequent games
+  round = 1;
+  question_num = 0;
+  // reset the spliced sports array from below
+  sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
+
   // Store user's name
   var name = match[1];
   // Send a welcome message and capitalize the first word of the name only
@@ -23,6 +30,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   play(msg.chat.id);
   });
 });
+
 
 bot.onText(/\/play/, (msg, match) => {
   play(msg.chat.id);
@@ -37,7 +45,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
     bot.sendMessage(msg.chat.id, "Yes").then(function () {
       question_num++;
       if(question_num == 3) {
-        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+        bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
   }
@@ -46,35 +54,11 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
       bot.sendMessage(msg.chat.id, "No").then(function () {
       question_num++;
       if(question_num == 3) {
-        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+        bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
   };
 
-});
-
-// sum command
-bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
-  var result = 1;
-  match[1].trim().split(/\s+/).forEach(function (i) {
-    result = result * (i || 1);
-  })
-  bot.sendMessage(msg.chat.id, result).then(function () {
-    // reply sent!
-  });
-});
-
-// Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
-
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
 });
 
 function play(chatId){
@@ -92,28 +76,16 @@ function play(chatId){
 
   var all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
 
-
-  // start of looped 5 rounds
-  // for
-  var flag = true;
-
-  //while (true) {
-  //while(round <= 5 && flag == true)
-  //{
-
-    //bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess, i.e., \/ask something');
-    bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a game. Make a guess, i.e., \/ask something');
+    bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a sport. Make a guess, i.e., \/ask something');
    
     // select a random sport from the list of sports
     var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
     // delete the chosen sport from the list so that next time no repeats occur
     const index = sports.indexOf(rand_selected_sport);
-    if (index > -1) {
+    if (index > -1)
       sports.splice(index, 1);
-    }
-    console.log(sports);
-    console.log(sports);
 
+    // assign appropriate arrays of sport characters given by the randomly selected sport
     switch(rand_selected_sport) {
       case 'basketball':
         sport_chars = basketball;
@@ -136,32 +108,33 @@ function play(chatId){
       default:
       console.log("Sport not found.");
     }
+    // increment the round for further interations and continuity
     round++;
-  //}
-//}
 
+    // implement "show all options" function within the play function so that it can only be called after the game has started
     bot.on('message', (msg) => {
       if (msg.text.toString().toLowerCase().includes("show all options")) {
         bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
       }
     });
 
-
+    // check
     bot.on('message', (msg) => {
+
       if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () {
+        if(round == 5) bot.sendMessage(msg.chat.id, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");
+        else
         bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
         question_num = 0;
       }
       else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
-        bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
-        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play");
+        bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () {
+        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
         question_num = 0;
       }
   });
-  //}
 }
-
 
 /**
  * Fisher-Yates Shuffle
