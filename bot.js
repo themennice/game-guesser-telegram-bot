@@ -62,6 +62,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
       });
     };
   }
+  else finalMessage(msg.chat.id);
 });
 
 function play(chatId){
@@ -127,6 +128,7 @@ function play(chatId){
       }
   });
 }
+else finalMessage(msg.chat.id);
 }
 
 
@@ -135,6 +137,7 @@ bot.on('message', (msg) => {
   if (msg.text.toString().toLowerCase().includes("show all options") && round <= 5) {
     bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
   }
+  else finalMessage(msg.chat.id);
 });
 
 
@@ -143,7 +146,6 @@ function finalMessage(chatId) {
   else { bot.sendMessage(chatId, "If you would like to play again in round " + round +  ", simply type /play"); }
   question_num = 0;
 }
-
 
 /**
  * Fisher-Yates Shuffle
