@@ -127,12 +127,14 @@ function play(chatId){
   });
 }
 
+
 // implement "show all options" function within the play function so that it can only be called after the game has started
 bot.on('message', (msg) => {
   if (msg.text.toString().toLowerCase().includes("show all options")) {
     bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
   }
 });
+
 
 function finalMessage(chatId) {
   if(round > 5){ bot.sendMessage(chatId, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");}
