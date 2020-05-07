@@ -117,10 +117,12 @@ function play(chatId){
     // check
     bot.on('message', (msg) => {
 
-      if (rand_selected_sport == msg.text.toString().toLowerCase()) {
+      if (rand_selected_sport == msg.text.toString().toLowerCase() && flag) {
+        flag = false;
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id); });
       }
-      else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
+      else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase() && flag) {
+        flag = false;
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () {
         finalMessage(msg.chat.id); });
       }
