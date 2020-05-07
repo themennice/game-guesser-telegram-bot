@@ -20,7 +20,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   bot.sendMessage(msg.chat.id, '\tWelcome to Game Guesser Bot, ' + name.charAt(0).toUpperCase() + name.substring(1).toLowerCase() +'! \nI will think of an Olympic game and you will try to guess it.\n\nSimply type a characteristic as \/ask something\. I will say yes if it belongs to my guessed sport, and no otherwise.\n\nAfter 10 questions simply type the name of the game you think I guessed!').then(function () {
   // 
   bot.sendMessage(msg.chat.id, 'You could also type \[show all options\] (without brackets) to see all available sport characteristics.');
-  play();
+  play(msg.chat.id);
   });
 
 });
@@ -75,7 +75,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   bot.sendMessage(chatId, resp);
 });
 
-function play(){
+function play(chatId){
 
   // declare a list of the Olympic sports for a given demonstration
   var sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
@@ -101,7 +101,7 @@ function play(){
     flag = false;
 
     //bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess, i.e., \/ask something');
-    bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + '! I have selected a game. Make a guess, i.e., \/ask something');
+    bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a game. Make a guess, i.e., \/ask something');
    
     // select a random sport from the list of sports
     var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
