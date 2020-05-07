@@ -11,6 +11,7 @@ var sports;
 var all_chars;
 var rand_selected_sport;
 var flag = true;
+var score = 0;
 
 console.log('*********** bot server started *************');
 
@@ -118,6 +119,7 @@ function play(chatId){
 
       if (rand_selected_sport == msg.text.toString().toLowerCase() && flag && round <= 6) {
         flag = false;
+        score++;
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id); });
       }
       else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase() && flag && round <= 6) {
@@ -139,7 +141,7 @@ bot.on('message', (msg) => {
 
 
 function finalMessage(chatId) {
-  if(round > 5){ round = 10; bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
+  if(round > 5){ round = 10; bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. You guessed " + score + " correctly. Your final score is " + score/5*100 + " percent! \n\n Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
   else { bot.sendMessage(chatId, "If you would like to play again in round " + round +  ", simply type /play"); }
   question_num = 0;
 }
