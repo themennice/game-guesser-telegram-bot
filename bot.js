@@ -20,6 +20,62 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   bot.sendMessage(msg.chat.id, '\tWelcome to Game Guesser Bot, ' + name.charAt(0).toUpperCase() + name.substring(1).toLowerCase() +'! \nI will think of an Olympic game and you will try to guess it.\n\nSimply type a characteristic as \/ask something\. I will say yes if it belongs to my guessed sport, and no otherwise.\n\nAfter 10 questions simply type the name of the game you think I guessed!').then(function () {
   // 
   bot.sendMessage(msg.chat.id, 'You could also type \[show all options\] (without brackets) to see all available sport characteristics.');
+  play();
+  });
+
+});
+
+
+// helper function for asking
+bot.onText(/^\/ask (.+)$/, function (msg, match) {
+
+  var sport = match[1];
+  
+  if(sport_chars.includes(sport.toString().toLowerCase())) {
+    bot.sendMessage(msg.chat.id, "Yes").then(function () {
+      question_num++;
+      if(question_num == 3) {
+        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+      }
+    });
+  }
+
+  else {
+      bot.sendMessage(msg.chat.id, "No").then(function () {
+      question_num++;
+      if(question_num == 3) {
+        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
+      }
+    });
+  };
+
+});
+
+// sum command
+bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
+  var result = 1;
+  match[1].trim().split(/\s+/).forEach(function (i) {
+    result = result * (i || 1);
+  })
+  bot.sendMessage(msg.chat.id, result).then(function () {
+    // reply sent!
+  });
+});
+
+// Matches "/echo [whatever]"
+bot.onText(/\/echo (.+)/, (msg, match) => {
+  // 'msg' is the received Message from Telegram
+  // 'match' is the result of executing the regexp above on the text content
+  // of the message
+
+  const chatId = msg.chat.id;
+  const resp = match[1]; // the captured "whatever"
+
+  // send back the matched "whatever" to the chat
+  bot.sendMessage(chatId, resp);
+});
+
+function play(){
 
   // declare a list of the Olympic sports for a given demonstration
   var sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
@@ -44,7 +100,9 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   //{
     flag = false;
 
-    bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess.');
+    //bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess, i.e., \/ask something');
+    bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + '! I have selected a game. Make a guess, i.e., \/ask something');
+   
     // select a random sport from the list of sports
     var rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
     // delete the chosen sport from the list so that next time no repeats occur
@@ -100,61 +158,10 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   });
   //}
 
-  });
 
-});
-
+}
 
 
-
-// helper function for asking
-bot.onText(/^\/ask (.+)$/, function (msg, match) {
-
-  var sport = match[1];
-  
-  if(sport_chars.includes(sport.toString().toLowerCase())) {
-    bot.sendMessage(msg.chat.id, "Yes").then(function () {
-      question_num++;
-      if(question_num == 3) {
-        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
-      }
-    });
-  }
-
-  else {
-      bot.sendMessage(msg.chat.id, "No").then(function () {
-      question_num++;
-      if(question_num == 3) {
-        bot.sendMessage(msg.chat.id, "Guess the game by typing it below");
-      }
-    });
-  };
-
-});
-
-// sum command
-bot.onText(/^\/multiply((\s+\d+)+)$/, function (msg, match) {
-  var result = 1;
-  match[1].trim().split(/\s+/).forEach(function (i) {
-    result = result * (i || 1);
-  })
-  bot.sendMessage(msg.chat.id, result).then(function () {
-    // reply sent!
-  });
-});
-
-// Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
-
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
-});
 
 /**
  * Fisher-Yates Shuffle
