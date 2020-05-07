@@ -143,7 +143,7 @@ function play(chatId){
           bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
           finalMessage(msg.chat.id);
         }
-        }
+        });
 
         // implement "show all options" function within the play function so that it can only be called after the game has started
         bot.on('message', (msg) => {
