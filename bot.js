@@ -40,8 +40,8 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   var flag = true;
 
   //while (true) {
-  while(round <= 5 && flag == true)
-  {
+  //while(round <= 5 && flag == true)
+  //{
     flag = false;
 
     bot.sendMessage(msg.chat.id, ' \n \nLet us start round ' + round + ' out of 5! I have selected a game. Make a guess.');
@@ -78,7 +78,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       console.log("Sport not found.");
     }
     round++;
-  }
+  //}
 //}
 
     bot.on('message', (msg) => {
