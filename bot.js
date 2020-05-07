@@ -141,7 +141,7 @@ bot.on('message', (msg) => {
 
 
 function finalMessage(chatId) {
-  if(round > 5){ round = 10; bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. You guessed " + score + " correctly. Your final score is " + score/5*100 + " percent! \n\n Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
+  if(round > 5){ round = 10; bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. You guessed " + score + " correctly. Your final score is " + score/5*100 + " percent! \n\nPlease type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot \n\n\n");}
   else { bot.sendMessage(chatId, "If you would like to play again in round " + round +  ", simply type /play"); }
   question_num = 0;
 }
