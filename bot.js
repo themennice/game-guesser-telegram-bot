@@ -85,9 +85,9 @@ function play(chatId){
     // select a random sport from the list of sports
     rand_selected_sport = sports[Math.floor(Math.random() * sports.length)];
     // delete the chosen sport from the list so that next time no repeats occur
-    // const index = sports.indexOf(rand_selected_sport);
-    // if (index > -1)
-    //   sports.splice(index, 1);
+    const index = sports.indexOf(rand_selected_sport);
+    if (index > -1)
+      sports.splice(index, 1);
 
     // assign appropriate arrays of sport characters given by the randomly selected sport
     switch(rand_selected_sport) {
