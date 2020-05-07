@@ -25,7 +25,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 });
 
 bot.onText(/\/play/, (msg, match) => {
-  play();
+  play(msg.chat.id);
 });
 
 // helper function for asking
