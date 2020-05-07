@@ -66,12 +66,6 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
 
 function play(chatId){
 
-  //if(round > 5) { bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
-  if(round > 5) { bot.sendMessage(chatId, "\n\nThis");}
-
-  // // declare a list of the Olympic sports for a given demonstration
-  // sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
-
   // intiate and populate Olympic sports lists - basketball
   var basketball = ['court', 'basket', 'team', 'ball', 'timed'];
   var football = ['goal', 'goalkeeper', 'team', 'doubles', 'grass', 'football', 'field', 'stadium', 'halves'];
@@ -122,11 +116,11 @@ function play(chatId){
     // check
     bot.on('message', (msg) => {
 
-      if (rand_selected_sport == msg.text.toString().toLowerCase() && flag) {
+      if (rand_selected_sport == msg.text.toString().toLowerCase() && flag && round <= 5) {
         flag = false;
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id); });
       }
-      else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase() && flag) {
+      else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase() && flag && round <= 5) {
         flag = false;
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () {
         finalMessage(msg.chat.id); });
@@ -138,7 +132,7 @@ function play(chatId){
 
 // implement "show all options" function within the play function so that it can only be called after the game has started
 bot.on('message', (msg) => {
-  if (msg.text.toString().toLowerCase().includes("show all options")) {
+  if (msg.text.toString().toLowerCase().includes("show all options") && round <= 5) {
     bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
   }
 });
