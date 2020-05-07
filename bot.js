@@ -47,7 +47,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   if(sport_chars.includes(sport.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes").then(function () {
       question_num++;
-      if(question_num > 3) {
+      if(question_num >= 3) {
         bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
@@ -56,7 +56,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   else {
       bot.sendMessage(msg.chat.id, "No").then(function () {
       question_num++;
-      if(question_num > 3) {
+      if(question_num >= 3) {
         bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
@@ -141,7 +141,7 @@ bot.on('message', (msg) => {
 
 function finalMessage(chatId) {
   if(round > 5){ bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game. You could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
-  else { bot.sendMessage(chatId, "If you would like to play again, simply type /play"); }
+  else { bot.sendMessage(chatId, "If you would like to play again in round " + round +  ", simply type /play"); }
   question_num = 0;
 }
 
