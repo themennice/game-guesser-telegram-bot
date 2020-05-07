@@ -66,6 +66,9 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
 
 function play(chatId){
 
+  //if(round > 5) { bot.sendMessage(chatId, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");}
+  if(round > 5) { bot.sendMessage(chatId, "\n\nThis");}
+
   // // declare a list of the Olympic sports for a given demonstration
   // sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
 
