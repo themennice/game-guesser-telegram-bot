@@ -82,7 +82,8 @@ function play(chatId){
 
   all_chars = shuffle(basketball.concat(football, gymnastics, surfing, boxing, tennis));
 
-    bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a sport. Make a guess, i.e., \/ask something');
+  if(round <= 5)
+  { bot.sendMessage(chatId, ' \n \nLet us start round ' + round + '! I have selected a sport. Make a guess, i.e., \/ask something');
     flag = true;
    
     // select a random sport from the list of sports
@@ -131,6 +132,7 @@ function play(chatId){
         finalMessage(msg.chat.id); });
       }
   });
+}
 }
 
 
