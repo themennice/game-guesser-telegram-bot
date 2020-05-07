@@ -7,24 +7,26 @@ var Bot = require('node-telegram-bot-api'),
 let round = 1;
 let question_num = 0;
 var sport_chars;
+var sports;
 
 console.log('bot server started...');
 
 // start command for the guess game
 bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
-
   // Store user's name
   var name = match[1];
-
   // Send a welcome message and capitalize the first word of the name only
   bot.sendMessage(msg.chat.id, '\tWelcome to Game Guesser Bot, ' + name.charAt(0).toUpperCase() + name.substring(1).toLowerCase() +'! \nI will think of an Olympic game and you will try to guess it.\n\nSimply type a characteristic as \/ask something\. I will say yes if it belongs to my guessed sport, and no otherwise.\n\nAfter 10 questions simply type the name of the game you think I guessed!').then(function () {
-  // 
+  // Offer the possibility of choosing options
   bot.sendMessage(msg.chat.id, 'You could also type \[show all options\] (without brackets) to see all available sport characteristics.');
+  // Start playing the game while also passing the chat id
   play(msg.chat.id);
   });
-
 });
 
+bot.onText(/\/play/, (msg, match) => {
+  play();
+});
 
 // helper function for asking
 bot.onText(/^\/ask (.+)$/, function (msg, match) {
@@ -78,7 +80,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 function play(chatId){
 
   // declare a list of the Olympic sports for a given demonstration
-  var sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
+  sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
 
   // intiate and populate Olympic sports lists - basketball
   var basketball = ['court', 'basket', 'team', 'basketball', 'timed'];
@@ -149,10 +151,12 @@ function play(chatId){
     bot.on('message', (msg) => {
       if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
+        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play");
         flag = true;
       }
       else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
+        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play");
         flag = true;
       }
   });
@@ -160,7 +164,6 @@ function play(chatId){
 
 
 }
-
 
 
 /**
