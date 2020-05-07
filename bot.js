@@ -53,6 +53,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       sports.splice(index, 1);
     }
     console.log(sports);
+    console.log(sports);
 
     switch(rand_selected_sport) {
       case 'basketball':
