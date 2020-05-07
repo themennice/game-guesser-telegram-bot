@@ -42,13 +42,20 @@ bot.onText(/\/play/, (msg, match) => {
 
 // helper function for asking
 bot.onText(/^\/ask (.+)$/, function (msg, match) {
-  if(round <= 6){
+
+  if(round <= 6)
+  {
+
     var sport = match[1];
     
-    if(sport_chars.includes(sport.toString().toLowerCase())) {
-      bot.sendMessage(msg.chat.id, "Yes").then(function () {
+    if(sport_chars.includes(sport.toString().toLowerCase()))
+    {
+      bot.sendMessage(msg.chat.id, "Yes").then(function ()
+      {
         question_num++;
-        if(question_num >= 3) {
+
+        if(question_num >= 3)
+        {
           bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
         }
       });
