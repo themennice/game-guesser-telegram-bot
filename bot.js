@@ -161,8 +161,6 @@ function play(chatId){
       }
   });
   //}
-
-
 }
 
 
