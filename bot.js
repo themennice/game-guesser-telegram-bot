@@ -112,6 +112,14 @@ function play(chatId){
     }
     // increment the round for further interations and continuity
     round++;
+}
+
+// implement "show all options" function within the play function so that it can only be called after the game has started
+    bot.on('message', (msg) => {
+      if (msg.text.toString().toLowerCase().includes("show all options")) {
+        bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
+      }
+    });
 
     // check
     bot.on('message', (msg) => {
@@ -131,14 +139,6 @@ function play(chatId){
         question_num = 0;
       }
   });
-}
-
-// implement "show all options" function within the play function so that it can only be called after the game has started
-    bot.on('message', (msg) => {
-      if (msg.text.toString().toLowerCase().includes("show all options")) {
-        bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
-      }
-    });
 /**
  * Fisher-Yates Shuffle
  * Shuffles array in place.
