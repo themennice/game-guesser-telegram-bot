@@ -39,7 +39,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
   // for
   var flag = true;
 
-  loop: while (true) {
+  while (true) {
   while(round <= 5 && flag == true)
   {
     flag = false;
@@ -90,12 +90,12 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
       if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
         bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
         flag = true;
-        continue loop;
+        continue;
       }
       else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
         bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
         flag = true;
-        continue loop;
+        continue;
       }
   });
   }
