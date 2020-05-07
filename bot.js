@@ -131,28 +131,40 @@ function play(chatId){
   //       question_num = 0;
   //     }
   // });
-}
+        bot.on('message', (msg) => {
+        if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
+          console.log(rand_selected_sport);
+          //bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id) });
+          bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
+          finalMessage(msg.chat.id)
+        }
+        else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
+          // bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () { finalMessage(msg.chat.id) });
+          bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
+          finalMessage(msg.chat.id);
+        }
+        }
 
-// implement "show all options" function within the play function so that it can only be called after the game has started
-bot.on('message', (msg) => {
-  if (msg.text.toString().toLowerCase().includes("show all options")) {
-    bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
-  }
-});
+        // implement "show all options" function within the play function so that it can only be called after the game has started
+        bot.on('message', (msg) => {
+        if (msg.text.toString().toLowerCase().includes("show all options")) {
+          bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
+        }
+        });
 
-bot.on('message', (msg) => {
-  if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
-    console.log(rand_selected_sport);
-    //bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id) });
-    bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
-    finalMessage(msg.chat.id)
-  }
-  else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
-    // bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () { finalMessage(msg.chat.id) });
-    bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
-    finalMessage(msg.chat.id);
-  }
-});
+// bot.on('message', (msg) => {
+//   if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
+//     console.log(rand_selected_sport);
+//     //bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () { finalMessage(msg.chat.id) });
+//     bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!");
+//     finalMessage(msg.chat.id)
+//   }
+//   else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
+//     // bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () { finalMessage(msg.chat.id) });
+//     bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".");
+//     finalMessage(msg.chat.id);
+//   }
+// });
 
 function finalMessage(chatId) {
   if(round > 5){ bot.sendMessage(chatId, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");}
