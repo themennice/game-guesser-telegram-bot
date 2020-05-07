@@ -62,7 +62,6 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
       });
     };
   }
-  else bot.sendMessage(msg.chat.id, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");
 });
 
 function play(chatId){
@@ -128,7 +127,6 @@ function play(chatId){
       }
   });
 }
-else bot.sendMessage(msg.chat.id, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");
 }
 
 
@@ -137,7 +135,6 @@ bot.on('message', (msg) => {
   if (msg.text.toString().toLowerCase().includes("show all options") && round <= 5) {
     bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
   }
-  else bot.sendMessage(msg.chat.id, "\n\nThis is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to restart the game.\n\nYou could also look at this project on github instead:\nhttps://github.com/themennice/game-guesser-telegram-bot");
 });
 
 
