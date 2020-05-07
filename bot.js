@@ -47,7 +47,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   if(sport_chars.includes(sport.toString().toLowerCase())) {
     bot.sendMessage(msg.chat.id, "Yes").then(function () {
       question_num++;
-      if(question_num == 3) {
+      if(question_num > 3) {
         bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
@@ -56,7 +56,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
   else {
       bot.sendMessage(msg.chat.id, "No").then(function () {
       question_num++;
-      if(question_num == 3) {
+      if(question_num > 3) {
         bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
       }
     });
@@ -70,7 +70,7 @@ function play(chatId){
   // sports = ['basketball', 'football', 'gymnastics', 'surfing', 'boxing', 'tennis'];
 
   // intiate and populate Olympic sports lists - basketball
-  var basketball = ['court', 'basket', 'team', 'basketball', 'timed'];
+  var basketball = ['court', 'basket', 'team', 'ball', 'timed'];
   var football = ['goal', 'goalkeeper', 'team', 'doubles', 'grass', 'football', 'field', 'stadium', 'halves'];
   var gymnastics = ['gym', 'flexibility', 'score', 'jumping'];
   var surfing = ['surfboard', 'outside', 'water', 'waves', 'singles', 'score'];
