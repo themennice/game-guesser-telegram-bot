@@ -78,6 +78,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
     }
     round++;
   }
+}
 
     bot.on('message', (msg) => {
       if (msg.text.toString().toLowerCase().includes("show all options")) {
@@ -98,7 +99,7 @@ bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
         continue;
       }
   });
-  }
+  //}
 
   });
 
