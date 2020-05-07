@@ -1,4 +1,5 @@
 var token = '1044989057:AAGkvVCLjiY3JsJOBjENwm_5tTHy_BBuhxg';
+
 var Bot = require('node-telegram-bot-api'),
     bot = new Bot(token, { polling: true });
 
@@ -111,6 +112,25 @@ function play(chatId){
     }
     // increment the round for further interations and continuity
     round++;
+
+    // check
+    bot.on('message', (msg) => {
+
+      if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
+        bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () {
+        if(round == 5) bot.sendMessage(msg.chat.id, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");
+        else
+        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
+        question_num = 0;
+      }
+      else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
+        bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () {
+        if(round > 5) bot.sendMessage(msg.chat.id, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");
+        else
+        bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
+        question_num = 0;
+      }
+  });
 }
 
 // implement "show all options" function within the play function so that it can only be called after the game has started
@@ -119,26 +139,6 @@ function play(chatId){
         bot.sendMessage(msg.chat.id, shuffle(all_chars).toString());
       }
     });
-
-// check
-bot.on('message', (msg) => {
-
-  if (msg.text.toString().toLowerCase().includes(rand_selected_sport)) {
-    bot.sendMessage(msg.chat.id, "You are correct! I thought of " + rand_selected_sport + "!").then(function () {
-    if(round == 5) bot.sendMessage(msg.chat.id, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");
-    else
-    bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
-    question_num = 0;
-  }
-  else if (sports.includes(msg.text.toString().toLowerCase()) && rand_selected_sport != msg.text.toString().toLowerCase()) {
-    bot.sendMessage(msg.chat.id, "Sorry, " + msg.text.toString().toLowerCase() + " is not the sport I guessed. I selected " + rand_selected_sport + ".").then(function () {
-    if(round > 5) bot.sendMessage(msg.chat.id, "This is the end of round 5. The game is over. Please type in \'/wakeup Your_Name\' if you would like to start all over. You could also look at this project on github instead: https://github.com/themennice/game-guesser-telegram-bot");
-    else
-    bot.sendMessage(msg.chat.id, "If you would like to play again, simply type /play"); });
-    question_num = 0;
-  }
-});
-
 /**
  * Fisher-Yates Shuffle
  * Shuffles array in place.
