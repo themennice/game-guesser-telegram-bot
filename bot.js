@@ -9,7 +9,7 @@ let question_num = 0;
 var sport_chars;
 var sports;
 var all_chars;
-var rand_selected_sport;
+var rand_selected_sport = "asdfghjkllkjhgfdsdfghjk";
 
 console.log('*********** bot server started *************');
 
