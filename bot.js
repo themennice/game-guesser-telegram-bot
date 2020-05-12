@@ -18,7 +18,7 @@ console.log('*********** bot server started *************');
 // send a welcome message to the user and notify them on how to start the bot
 bot.onText(/\/start/, (msg) => {
 
-bot.sendMessage(msg.chat.id, "Welcome to the Guess My Game Bot! To launch the bot, simply type the following: /wakeup your_name");
+bot.sendMessage(msg.chat.id, "Welcome to the Guess My Game Bot!\nTo launch the bot, simply type the following: /wakeup your_name");
     
 });
 
