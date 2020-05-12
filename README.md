@@ -42,7 +42,7 @@ set git remote heroku to https://git.heroku.com/thawing-inlet-61413.git
 
 See also the list of [contributors](https://github.com/themennice/game-guesser-telegram-bot/contributors) who participated in this project.
 
-## Possible improvements
+## Possible Improvements
 
 Incorporating Prolog logic into the game.
 
