@@ -45,5 +45,7 @@ See also the list of [contributors](https://github.com/themennice/game-guesser-t
 ## Possible improvements
 
 Incorporating Prolog logic into the game.
+
 Add inline buttons to simplify messages.
+
 Add an option to play other related games.
