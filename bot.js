@@ -15,6 +15,13 @@ var score = 0;
 
 console.log('*********** bot server started *************');
 
+// send a welcome message to the user and notify them on how to start the bot
+bot.onText(/\/start/, (msg) => {
+
+bot.sendMessage(msg.chat.id, "Welcome to the Guess My Game Bot! To launch the bot, simply type the following: /wakeup your_name");
+    
+});
+
 // start command for the guess game
 bot.onText(/^\/wakeup (.+)$/, function (msg, match) {
 
@@ -54,7 +61,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
       {
         question_num++;
 
-        if(question_num >= 3)
+        if(question_num >= 10)
         {
           bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
         }
@@ -64,7 +71,7 @@ bot.onText(/^\/ask (.+)$/, function (msg, match) {
     else {
         bot.sendMessage(msg.chat.id, "No").then(function () {
         question_num++;
-        if(question_num >= 3) {
+        if(question_num >= 10) {
           bot.sendMessage(msg.chat.id, "Guess the sport by typing it below");
         }
       });
